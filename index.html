@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FlavorForge – FridgeRescue</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="bg"><span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span></div>
+  <div id="floaters" aria-hidden="true"></div>
+
+  <header class="hero">
+    <div class="logo">🔥 FlavorForge</div>
+    <h1>Fridge<span>Rescue</span></h1>
+    <p>Tap what's in your fridge. We'll tell you what to cook before it goes bad.</p>
+  </header>
+
+  <main class="wrap">
+    <!-- Pantry selector -->
+    <section class="panel" id="pantryPanel">
+      <div class="panel-head">
+        <h2>🧺 Your Fridge <small id="count">0 items</small></h2>
+        <button class="link" onclick="clearPantry()">Clear all</button>
+      </div>
+      <div id="chips" class="chips"></div>
+
+      <form class="add" onsubmit="addCustom(event)">
+        <input id="custom" list="allIng" placeholder="Search or add an item (bell pepper, yogurt…)" autocomplete="off">
+        <datalist id="allIng"></datalist>
+        <button class="btn" type="submit">+ Add</button>
+      </form>
+
+      <div id="groups"></div>
+      <p class="note">Assumed staples (salt, oil, water, black pepper, turmeric, sugar) are ignored in match scores.</p>
+    </section>
+
+    <!-- Results -->
+    <section class="results">
+      <div class="toolbar">
+        <div class="tabs">
+          <button class="tab active" id="tabRescue" onclick="setView('rescue')">✨ Rescue Recipes</button>
+          <button class="tab" id="tabSaved" onclick="setView('saved')">❤️ Saved <b id="savedCount">0</b></button>
+        </div>
+        <div class="filters">
+          <label class="switch"><input type="checkbox" id="fQuick" onchange="setFilter()"><span></span>Under 20 min</label>
+          <label class="switch"><input type="checkbox" id="fVeg" onchange="setFilter()"><span></span>Vegetarian</label>
+        </div>
+      </div>
+      <div id="grid" class="grid"></div>
+    </section>
+  </main>
+
+  <!-- Recipe modal -->
+  <div class="modal" id="recipeModal" onclick="if(event.target===this)closeRecipe()">
+    <div class="sheet" id="sheet"></div>
+  </div>
+
+  <!-- Substitution modal -->
+  <div class="modal small" id="subModal" onclick="if(event.target===this)closeSub()">
+    <div class="sheet" id="subSheet"></div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
